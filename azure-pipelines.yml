@@ -20,8 +20,8 @@ jobs:
         oc project at-rafay765-dev
         oc new-app https://github.com/MRafaydev/openshift_poc_azure
         oc get bc openshift_poc_azure
-        oc start-build openshift_poc_azure --from-dir=. --follow --wait
+        oc new-build --binary --name openshift_poc_azure --strategy=docker
       
 # oc apply -f k8s/live/live-deployment.yaml 
 # oc apply -f k8s/live/live-service.yaml 
-# #  oc start-build example-poc --from-dir=. --follow --wait
+# #  oc start-build openshift_poc_azure --from-dir=. --follow --wait
