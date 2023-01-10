@@ -1,50 +1,33 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: example-poc
-  uid: f8beb3bc-33c0-432c-82c6-541318d98bf5
-  creationTimestamp: '2023-01-10T09:30:10Z'
-  generation: 1
   namespace: at-rafay765-dev
   labels:
-    app: example-poc
-    app.kubernetes.io/component: example-poc
-    app.kubernetes.io/instance: example-poc
+    app: openshift-poc-azure
+    app.kubernetes.io/component: openshift-poc-azure
+    app.kubernetes.io/instance: openshift-poc-azure
+    app.kubernetes.io/name: openshift-poc-azure
+    app.kubernetes.io/part-of: openshift-poc-azure-app
 spec:
-  triggers:
-    - type: ConfigChange
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-          - loyalty-and-rewards-management
-        from:
-          kind: ImageStreamTag
-          namespace: m11s
-          name: 'example-poc'
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
-      deployment: example-poc
+      app: openshift-poc-azure
   template:
     metadata:
       creationTimestamp: null
       labels:
-        deployment: example-poc
-      annotations:
-        openshift.io/generated-by: OpenShiftNewApp
+        app: openshift-poc-azure
+        deployment: openshift-poc-azure
     spec:
       containers:
-        - name: example-poc
+        - name: openshift-poc-azure
           image: >-
-            image-registry.openshift-image-registry.svc:5000/at-rafay765-dev/example-poc@sha256:bedbceb13ed95d33dd319a706d8e0d57bd6a616e6a95a73279a0152038f2bae6
-          ports:
-            - containerPort: 5000
-              protocol: TCP
+            image-registry.openshift-image-registry.svc:5000/at-rafay765-dev/openshift-poc-azure@sha256:7cdf76877193741eb58a4fbfe283869ad8c34ba8e4ec1c9a6baaf1b108a04f0d
           resources: {}
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
@@ -58,17 +41,95 @@ spec:
   revisionHistoryLimit: 10
   progressDeadlineSeconds: 600
 status:
-  observedGeneration: 1
+  observedGeneration: 2
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
   conditions:
     - type: Available
-      status: 'True'
-      lastUpdateTime: '2023-01-10T09:30:10Z'
-      lastTransitionTime: '2023-01-10T09:30:10Z'
+      status: "True"
+      lastUpdateTime: "2023-01-10T19:51:48Z"
+      lastTransitionTime: "2023-01-10T19:51:48Z"
       reason: MinimumReplicasAvailable
       message: Deployment has minimum availability.
     - type: Progressing
-      status: 'True'
-      lastUpdateTime: '2023-01-10T09:30:10Z'
-      lastTransitionTime: '2023-01-10T09:30:10Z'
+      status: "True"
+      lastUpdateTime: "2023-01-10T19:51:48Z"
+      lastTransitionTime: "2023-01-10T19:50:32Z"
       reason: NewReplicaSetAvailable
-      message: ReplicaSet "example-poc-7595df799b" has successfully progressed.
+      message: ReplicaSet "openshift-poc-azure-7fc66ddf57" has successfully progressed.
+# kind: Deployment
+# apiVersion: apps/v1
+# metadata:
+#   name: example-poc
+#   uid: f8beb3bc-33c0-432c-82c6-541318d98bf5
+#   creationTimestamp: '2023-01-10T09:30:10Z'
+#   generation: 1
+#   namespace: at-rafay765-dev
+#   labels:
+#     app: example-poc
+#     app.kubernetes.io/component: example-poc
+#     app.kubernetes.io/instance: example-poc
+# spec:
+#   triggers:
+#     - type: ConfigChange
+#     - type: ImageChange
+#       imageChangeParams:
+#         automatic: true
+#         containerNames:
+#           - loyalty-and-rewards-management
+#         from:
+#           kind: ImageStreamTag
+#           namespace: m11s
+#           name: 'example-poc'
+#   replicas: 0
+#   selector:
+#     matchLabels:
+#       deployment: example-poc
+#   template:
+#     metadata:
+#       creationTimestamp: null
+#       labels:
+#         deployment: example-poc
+#       annotations:
+#         openshift.io/generated-by: OpenShiftNewApp
+#     spec:
+#       containers:
+#         - name: example-poc
+#           image: >-
+#             image-registry.openshift-image-registry.svc:5000/at-rafay765-dev/example-poc@sha256:bedbceb13ed95d33dd319a706d8e0d57bd6a616e6a95a73279a0152038f2bae6
+#           ports:
+#             - containerPort: 5000
+#               protocol: TCP
+#           resources: {}
+#           terminationMessagePath: /dev/termination-log
+#           terminationMessagePolicy: File
+#           imagePullPolicy: IfNotPresent
+#       restartPolicy: Always
+#       terminationGracePeriodSeconds: 30
+#       dnsPolicy: ClusterFirst
+#       securityContext: {}
+#       schedulerName: default-scheduler
+#   strategy:
+#     type: RollingUpdate
+#     rollingUpdate:
+#       maxUnavailable: 25%
+#       maxSurge: 25%
+#   revisionHistoryLimit: 10
+#   progressDeadlineSeconds: 600
+# status:
+#   observedGeneration: 1
+#   conditions:
+#     - type: Available
+#       status: 'True'
+#       lastUpdateTime: '2023-01-10T09:30:10Z'
+#       lastTransitionTime: '2023-01-10T09:30:10Z'
+#       reason: MinimumReplicasAvailable
+#       message: Deployment has minimum availability.
+#     - type: Progressing
+#       status: 'True'
+#       lastUpdateTime: '2023-01-10T09:30:10Z'
+#       lastTransitionTime: '2023-01-10T09:30:10Z'
+#       reason: NewReplicaSetAvailable
+#       message: ReplicaSet "example-poc-7595df799b" has successfully progressed.
