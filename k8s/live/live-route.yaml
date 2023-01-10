@@ -1,0 +1,37 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: openshift-poc-azure
+  namespace: at-rafay765-dev
+  labels:
+    app: openshift-poc-azure
+    app.kubernetes.io/component: openshift-poc-azure
+    app.kubernetes.io/instance: openshift-poc-azure
+    app.kubernetes.io/name: openshift-poc-azure
+    app.kubernetes.io/part-of: openshift-poc-azure-app
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: >-
+    openshift-poc-azure-at-rafay765-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: openshift-poc-azure
+    weight: 100
+  port:
+    targetPort: 5000-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: >-
+        openshift-poc-azure-at-rafay765-dev.apps.sandbox-m2.ll9k.p1.openshiftapps.com
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2023-01-10T20:24:28Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.sandbox-m2.ll9k.p1.openshiftapps.com

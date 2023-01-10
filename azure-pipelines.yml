@@ -18,8 +18,12 @@ jobs:
       targetType: 'inline'
       script: |
         oc project at-rafay765-dev
-        oc start-build openshift_poc_azure --from-dir=. --follow --wait
-        oc get bc openshift_poc_azure
+        oc get bc openshift-poc-azure
+        oc start-build openshift-poc-azure --from-dir=. --follow --wait
+        oc apply -f k8s/live/live-deployment.yaml 
+        oc apply -f k8s/live/live-service.yaml
+        oc apply -f k8s/live/live-route.yaml
+  
         
       
 # oc apply -f k8s/live/live-deployment.yaml 
