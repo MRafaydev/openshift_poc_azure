@@ -22,9 +22,7 @@ jobs:
           oc start-build openshift-poc --from-dir=. --follow --wait
         else
           oc new-app https://bitbucket.org/rafay765/example-poc.git --strategy=docker --name=openshift-poc
-          oc apply -f k8s/live/live-deployment.yaml 
-          oc apply -f k8s/live/live-service.yaml
-          oc apply -f k8s/live/live-route.yaml  
+          oc start-build openshift-poc --from-dir=. --follow --wait
         fi
 
 
