@@ -19,7 +19,7 @@ jobs:
       script: |
         oc project at-rafaydev765-dev
         oc new-app https://bitbucket.org/rafay765/example-poc.git --strategy=docker --name=openshift-poc
-        oc get bc openshift
+        oc get bc openshift-poc
         oc start-build openshift-poc-azure --from-dir=. --follow --wait
 
 
