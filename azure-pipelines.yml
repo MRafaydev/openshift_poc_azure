@@ -18,12 +18,14 @@ jobs:
       targetType: 'inline'
       script: |
         oc project at-rafaydev765-dev
-        oc new-app https://bitbucket.org/rafay765/example-poc.git --strategy=docker --name=openshift-poc
-        oc get bc openshift-poc
-        oc start-build openshift-poc --from-dir=. --follow --wait
-        oc apply -f k8s/live/live-deployment.yaml 
-        oc apply -f k8s/live/live-service.yaml
-        oc apply -f k8s/live/live-route.yaml  
+        if oc get bc openshift-poc; then
+          oc start-build openshift-poc --from-dir=. --follow --wait
+        else
+          oc new-app https://bitbucket.org/rafay765/example-poc.git --strategy=docker --name=openshift-poc
+          oc apply -f k8s/live/live-deployment.yaml 
+          oc apply -f k8s/live/live-service.yaml
+          oc apply -f k8s/live/live-route.yaml  
+        fi
 
 
 # oc apply -f k8s/live/live-deployment.yaml 
